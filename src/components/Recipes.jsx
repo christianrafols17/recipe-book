@@ -1,20 +1,20 @@
-import React from 'react'
-import { BsSearch } from 'react-icons/bs'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { BsSearch } from 'react-icons/bs';
 
 const Recipes = () => {
-    const counter = 20;
+    const [recipes, setRecipes] = useState([]);
 
-    const renderDuplicates = () => {
-        const duplicateArray = Array.from({ length: counter }, (_, index) => (
-          <div key={index} className='duplicate bg-green-200 p-2 rounded-md flex flex-col h-[240px] justify-between text-center'>
-            <h1 className='text-lg font-semibold'>Title</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quidem.</p>
-            <button className='bg-white p-2 rounded-md'>View Recipe</button>
-          </div>
-        ));
-    
-        return duplicateArray;
-    };
+    useEffect(() => {
+        const apiURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+        axios.get(apiURL)
+        .then((response) => {
+            setRecipes(response.data.meals);
+        })
+        .catch((error) => {
+            console.error('Error fetching data:', error);
+        });
+    }, []);
     
     return (
     <div className='w-full min-h-screen bg-gradient-to-b from-gray-200 to-indigo-200 p-24'>
@@ -26,7 +26,14 @@ const Recipes = () => {
             </span>    
         </div>
         <div className='grid grid-cols-5 gap-5'>
-        {renderDuplicates()}
+            {recipes.map((recipe) => (
+                <div key={recipe.idMeal} className='duplicate bg-white bg-opacity-20 rounded-md flex flex-col h-[240px] justify-between text-center'>
+                    <img className='w-full h-1/2 object-cover rounded-t-md hover:scale-105 duration-200' src={recipe.strMealThumb} alt={recipe.strMeal}/>
+                    <h1 className='text-base font-semibold'>{recipe.strMeal}</h1>
+                    <span className='text-sm'>{recipe.strCategory}</span>
+                    <button className='bg-white p-2 rounded-md'>View Recipe</button>
+                </div>
+            ))}
         </div>
     </div>
     );
