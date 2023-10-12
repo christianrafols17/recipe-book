@@ -4,6 +4,7 @@ import Home from './components/Home'
 import Blog from './components/Blog'
 import About from './components/About'
 import RecipeList from './components/RecipeList/RecipeList'
+import MealSearch from './components/MealSearch'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,6 +16,7 @@ function App() {
       <RecipeList />
       <Blog />
       <About />
+      <MealSearch />
     </div>
   )
 }
