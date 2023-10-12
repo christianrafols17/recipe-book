@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import NavBar from './components/NavBar'
 import Home from './components/Home'
-import Recipes from './components/Recipes'
 import Blog from './components/Blog'
 import About from './components/About'
+import RecipeList from './components/RecipeList/RecipeList'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -12,7 +12,7 @@ function App() {
     <div className=''>
       <NavBar />
       <Home />
-      <Recipes />
+      <RecipeList />
       <Blog />
       <About />
     </div>

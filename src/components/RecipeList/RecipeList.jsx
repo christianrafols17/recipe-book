@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Recipes from '../Recipes'
 
 const RecipeList = () => {
   const [recipes, setRecipes] = useState([]);
@@ -17,15 +18,7 @@ const RecipeList = () => {
 
   return (
     <div>
-      <h1>Recipe List</h1>
-      {recipes.map((recipe) => (
-      <ul>
-          <li key={recipe.idMeal}>{recipe.strMeal}</li>
-          <li className='text-blue-400' key={recipe.idMeal}>{recipe.strTags}</li>
-          <li className='text-red-400'key={recipe.idMeal}>{recipe.strCategory}</li>
-          <li key={recipe.idMeal}><img className='w-[80px]' src={recipe.strMealThumb} alt={recipe.strMeal}/></li>
-      </ul>
-      ))}
+      <Recipes recipes={recipes} />
     </div>
   )
 }
