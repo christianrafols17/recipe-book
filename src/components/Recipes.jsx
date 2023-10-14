@@ -83,7 +83,7 @@ const Recipes = () => {
 			)}
 
             {(!searchResults || searchResults==='') && 
-                <div> No Result </div>
+                <div className='text-xl'> No Result </div>
             }
 
         </div>
