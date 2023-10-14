@@ -3,8 +3,7 @@ import NavBar from './components/NavBar'
 import Home from './components/Home'
 import Blog from './components/Blog'
 import About from './components/About'
-import RecipeList from './components/RecipeList/RecipeList'
-import MealSearch from './components/MealSearch'
+import Recipes from './components/Recipes'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,10 +12,9 @@ function App() {
     <div className=''>
       <NavBar />
       <Home />
-      <RecipeList />
+      <Recipes />
       <Blog />
       <About />
-      <MealSearch />
     </div>
   )
 }

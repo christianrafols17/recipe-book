@@ -10,7 +10,7 @@ const Home = () => {
             </div>
             <div className='w-3/5 flex flex-col gap-10'>
                 <h1 className='text-green-800 text-4xl font-bold'>Welcome to Recipe Book</h1>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit odit ipsum iusto officia ullam doloribus nostrum rerum ex debitis fugiat nulla eos deleniti molestiae, sint modi asperiores deserunt reprehenderit odio!</p>
+                <p>Introducing our innovative recipe book web app, the culinary companion you've been waiting for. Explore a world of delectable dishes, save your favorite recipes, and create shopping lists with ease, all in one user-friendly platform designed to elevate your cooking experience.</p>
             </div>
         </div>
     </div>
