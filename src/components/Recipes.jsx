@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { BsSearch } from 'react-icons/bs';
-import axios from 'axios'
+import axios from 'axios';
+import Modal from './Modal/Modal';
 
 const Recipes = () => {
     const [recipes, setRecipes] = useState([]);
     const [searchRecipe, setSearchRecipe] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-    const API_KEY = '1'; 
+    const API_KEY = '1';
+
+    const [modal, setModal] = useState(false);
+    const [selectedRecipe, setSelectedRecipe] = useState(null);
+
+    const openModal = (recipe, meal) => {
+      setSelectedRecipe(recipe, meal);
+      setModal(true);
+    }
+
+    const closeModal = () => {
+      setSelectedRecipe(null);
+      setModal(false);
+    };
 
     useEffect(() => {
         const apiURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
@@ -59,33 +73,37 @@ const Recipes = () => {
                 <input type='submit' value='' />  <BsSearch size={18} className='hover:cursor-pointer ms-auto'/>
             </span>    
         </div>
+        
         <div className='grid grid-cols-5 gap-5'>
          
-            {recipes && recipes.map((recipe) => (
-                <div key={recipe.idMeal} className='duplicate bg-white bg-opacity-20 rounded-md flex flex-col h-[240px] justify-between text-center'>
-                    <img className='w-full h-1/2 object-cover rounded-t-md hover:scale-105 duration-200' src={recipe.strMealThumb} alt={recipe.strMeal}/>
-                    <h1 className='text-base font-semibold'>{recipe.strMeal}</h1>
-                    <span className='text-sm'>{recipe.strCategory}</span>
-                    <button className='bg-white p-2 rounded-md'>View Recipe</button>
-                </div>
-            ))}
+          {recipes && recipes.map((recipe) => (
+              <div key={recipe.idMeal} className='duplicate bg-white bg-opacity-20 rounded-md flex flex-col h-[240px] justify-between text-center'>
+                  <img className='w-full h-1/2 object-cover rounded-t-md hover:scale-105 duration-200' src={recipe.strMealThumb} alt={recipe.strMeal}/>
+                  <h1 className='text-base font-semibold'>{recipe.strMeal}</h1>
+                  <span className='text-sm'>{recipe.strCategory}</span>
+                  <button className='bg-white p-2 rounded-md' onClick={() => openModal(recipe)}>View Recipe</button>
+              </div>
+          ))}
 
-            {searchResults &&
-                searchResults.length > 0 && (
-                searchResults.map((meal) => (
-                    <div key={meal.idMeal} className='duplicate bg-white bg-opacity-20 rounded-md flex flex-col h-[240px] justify-between text-center'>
-                    <img className='w-full h-1/2 object-cover rounded-t-md hover:scale-105 duration-200' src={meal.strMealThumb} alt={meal.strMeal}/>
-                    <h1 className='text-base font-semibold'>{meal.strMeal}</h1>
-                    <span className='text-sm'>{meal.strCategory}</span>
-                    <button className='bg-white p-2 rounded-md'>View Recipe</button>
-                </div>
-                ))
-			)}
+          {searchResults &&
+              searchResults.length > 0 && (
+              searchResults.map((meal) => (
+                  <div key={meal.idMeal} className='duplicate bg-white bg-opacity-20 rounded-md flex flex-col h-[240px] justify-between text-center'>
+                  <img className='w-full h-1/2 object-cover rounded-t-md hover:scale-105 duration-200' src={meal.strMealThumb} alt={meal.strMeal}/>
+                  <h1 className='text-base font-semibold'>{meal.strMeal}</h1>
+                  <span className='text-sm'>{meal.strCategory}</span>
+                  <button className='bg-white p-2 rounded-md' onClick={() => openModal(meal)}>View Recipe</button>
+              </div>
+              ))
+          )}
 
-            {(!searchResults || searchResults==='') && 
-                <div className='text-xl'> No Result </div>
-            }
+          {(!searchResults || searchResults==='') && 
+              <div className='text-xl'> No Result </div>
+          }
 
+          {modal && (
+            <Modal closeModal={closeModal} selectedRecipe={selectedRecipe}/>
+          )}
         </div>
     </div>
     );
