@@ -17,7 +17,7 @@ const Blog = () => {
   }, []);
 
   return (
-    <div className='w-full min-h-screen bg-gradient-to-b from-indigo-200 to-white ps-24 pb-10'>
+    <div name='Blog' className='w-full min-h-screen bg-gradient-to-b from-indigo-200 to-white ps-24 pt-24 pb-10'>
         <div className='flex flex-col'>
             <h1 className='text-4xl font-bold mx-auto pb-10'>Random Dish Recipe</h1>
             {randomRecipe && (

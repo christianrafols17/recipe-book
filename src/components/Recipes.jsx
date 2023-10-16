@@ -65,7 +65,7 @@ const Recipes = () => {
     };
 
     return (
-    <div className='w-full min-h-screen bg-gradient-to-b from-gray-200 to-indigo-200 p-24'>
+    <div name="Recipes" className='w-full min-h-screen bg-gradient-to-b from-gray-200 to-indigo-200 p-24'>
         <div className='flex flex-row py-4'>
             <h1 className='text-4xl font-bold'>Recipes</h1>
             <span className=' border border-yellow-400 rounded-lg w-1/3 ms-auto p-2 flex flex-row items-center'>

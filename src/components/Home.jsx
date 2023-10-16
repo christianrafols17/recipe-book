@@ -3,7 +3,7 @@ import HeroImage from '../assets/HeroImage.jpg'
 
 const Home = () => {
   return (
-    <div className='w-full h-screen bg-gray-200 text-black'>
+    <div name="Home" className='w-full h-screen bg-gray-200 text-black pt-24'>
         <div className='w-full h-full flex flex-row pe-24 justify-center items-center gap-10 '>
             <div className='w-2/5 '> 
                 <img src={ HeroImage } alt="Dish Hero Image" className='h-screen w-full'/>
