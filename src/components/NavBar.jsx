@@ -9,10 +9,10 @@ const Navbar = () => {
         <h1>Recipe Book</h1>
       </div>
       <div className='flex flex-row gap-4 text-lg'>
-        <Link to="Home" smooth duration={500} className='hover:cursor-pointer text-white'>Home</Link>
-        <Link to="Recipes" smooth duration={500} className='hover:cursor-pointer text-white'>Recipes</Link>
-        <Link to="Blog" smooth duration={500} className='hover:cursor-pointer text-white'>Blog</Link>
-        <Link to="About" smooth duration={500} className='hover:cursor-pointer text-white'>About Us</Link>
+        <Link to="Home" smooth duration={500} className='hover:cursor-pointer hover:scale-110 duration-300 hover:font-bold text-white'>Home</Link>
+        <Link to="Recipes" smooth duration={500} className='hover:cursor-pointer hover:scale-110 duration-300 hover:font-bold text-white'>Recipes</Link>
+        <Link to="Blog" smooth duration={500} className='hover:cursor-pointer hover:scale-110 duration-300 hover:font-bold text-white'>Blog</Link>
+        <Link to="About" smooth duration={500} className='hover:cursor-pointer hover:scale-110 duration-300 hover:font-bold text-white'>About Us</Link>
       </div>
     </div>
   )
