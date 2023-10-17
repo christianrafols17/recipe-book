@@ -11,7 +11,7 @@ const Modal = ({closeModal, selectedRecipe}) => {
               <div className='flex flex-row gap-10 w-full h-full'>
                 <div className='text-justify w-3/5'>
                   <h2 className='pb-4 text-lg font-bold'>Ingredients: </h2>
-                  <ul>
+                  <ul className='grid grid-cols-2'>
                     {selectedRecipe.ingredients.map((ingredient, index) => (
                       <li key={index}>{ingredient}</li>
                     ))}
