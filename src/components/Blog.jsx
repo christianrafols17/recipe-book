@@ -80,12 +80,12 @@ const Blog = () => {
           <img src={CookingTips} alt='Cooking-Tips-Hero-Image' className='w-2/5 shadow-md'/>
           <ol className=' list-decimal text-justify'>
           {cookingTips.map(({ id, title, description }) => (
-            <>
-            <li id={ id } className='text-xl font-bold'>{title}</li>
+            <li key={ id }>
+              <span className='text-xl font-bold'>{title}</span>
               <ul className=' list-inside'>
                 <li>{description}</li>
               </ul>
-            </>
+            </li>
           ))}
           </ol>
         </div>

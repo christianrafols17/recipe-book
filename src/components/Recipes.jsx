@@ -82,17 +82,17 @@ const Recipes = () => {
   };   
 
   return (
-  <div name="Recipes" className='w-full min-h-screen bg-gradient-to-b from-gray-200 to-indigo-200 px-24 pt-24'>
-      <div className='flex flex-row py-4'>
-          <h1 className='text-4xl font-bold'>Recipes</h1>
-          <span className=' border border-yellow-400 rounded-lg w-1/3 ms-auto p-2 flex flex-row items-center'>
+  <div name="Recipes" className='w-full min-h-screen bg-gradient-to-b from-gray-200 to-indigo-200 px-4 md:px-24 pt-16 md:pt-24'>
+      <div className='flex flex-row py-4 items-center'>
+          <h1 className='text-2xl md:text-4xl font-bold'>Recipes</h1>
+          <span className=' border border-yellow-400 rounded-lg w-2/4 md:w-1/3 ms-auto p-2 flex flex-row items-center'>
               <input type='text' placeholder='Search Recipe' value={searchRecipe} onChange={handleInputChange} className='bg-transparent w-full focus:outline-none'/>
               <input type='submit' value='' />  <BsSearch size={18} className='hover:cursor-pointer ms-auto'/>
           </span>  
       </div>
       <h3 className='text-justify pb-4'>Welcome to our recipes section, a culinary haven where you can embark on a delicious journey, exploring a wide array of meticulously crafted dishes that cater to every palate and occasion.</h3>
       
-      <div className='grid grid-cols-5 gap-5'>
+      <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5'>
         
         {recipes && recipes.map((meal) => (
           <div key={meal.idMeal} className='duplicate bg-white bg-opacity-20 rounded-md flex flex-col h-[240px] justify-between text-center shadow-md'>
