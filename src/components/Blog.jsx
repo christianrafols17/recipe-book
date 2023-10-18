@@ -75,37 +75,37 @@ const Blog = () => {
 
   return (
     <div name='Blog' className='w-full min-h-screen bg-gradient-to-b from-indigo-200 to-white pt-24 pb-10'>
-        <h1 className='text-4xl font-bold mx-auto pb-10 ps-24'>Cooking Tips</h1>
-        <div className='flex flex-row pe-24 pb-24 gap-10'>
-          <img src={CookingTips} alt='Cooking-Tips-Hero-Image' className='w-2/5 shadow-md'/>
-          <ol className=' list-decimal text-justify'>
+        <h1 className='text-2xl md:text-4xl font-bold pb-10 ps-4 md:ps-24'>Cooking Tips</h1>
+        <div className='flex flex-col-reverse md:flex-row pe-4 md:pe-24 pb-24 gap-10'>
+          <img src={CookingTips} alt='Cooking-Tips-Hero-Image' className='w-2/5 shadow-md hidden lg:flex'/>
+          <ol className=' list-decimal text-justify ps-8 md:ps-0'>
           {cookingTips.map(({ id, title, description }) => (
             <li key={ id }>
               <span className='text-xl font-bold'>{title}</span>
               <ul className=' list-inside'>
-                <li>{description}</li>
+                <li className='text-sm md:text-base'>{description}</li>
               </ul>
             </li>
           ))}
           </ol>
         </div>
-        <div className='flex flex-col ps-24'>
-          <h1 className='text-4xl font-bold mx-auto pb-10'>Random Dish Recipe</h1>
+        <div className='flex flex-col ps-4 pe-4 md:pe-0 md:ps-24'>
+          <h1 className='text-2xl md:text-4xl font-bold md:mx-auto pb-10'>Random Dish Recipe</h1>
           {randomRecipe && (
-          <div className='flex flex-row w-full gap-10'>
+          <div className='flex flex-col md:flex-row w-full gap-10'>
             
-              <div className='w-3/5 flex flex-col'>
-                  <h1 className='pb-8 font-bold text-2xl'>{ randomRecipe.strMeal }</h1>
+              <div className='w-full md:w-3/5 flex flex-col md:flex-col'>
+                  <h1 className='pb-8 font-bold text-lg md:text-2xl'>{ randomRecipe.strMeal }</h1>
                   <h2 className='pb-4 text-lg font-bold'>Ingredients: </h2>
                   <ul className='grid grid-cols-2'>
                     {allIngredients(randomRecipe).map((ingredient, index) => (
-                      <li key={index}>{ingredient}</li>
+                      <li key={index} className='text-sm md:text-base'>{ingredient}</li>
                     ))}
                   </ul>
                   <h2 className='py-4 font-bold text-lg'>Instruction:</h2>
-                  <span className=' text-justify'>{ randomRecipe.strInstructions }</span>
+                  <span className=' text-justify text-sm md:text-base'>{ randomRecipe.strInstructions }</span>
               </div>
-              <img src={ randomRecipe.strMealThumb } alt='Featured Image' className='w-2/5 h-screen shadow-md'/>
+              <img src={ randomRecipe.strMealThumb } alt='Featured Image' className='w-full md:w-2/5 h-screen shadow-md'/>
           </div>
           )}
         </div>

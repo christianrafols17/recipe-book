@@ -27,7 +27,7 @@ const Navbar = () => {
           </div>
         </div>
       }
-      <div className='hidden flex-row gap-4 md:text-lg md:flex'>
+      <div className='hidden flex-row gap-6 md:text-lg md:flex'>
         <Link to="Home" smooth duration={500} className='hover:cursor-pointer hover:scale-110 duration-300 hover:font-bold text-white'>Home</Link>
         <Link to="Recipes" smooth duration={500} className='hover:cursor-pointer hover:scale-110 duration-300 hover:font-bold text-white'>Recipes</Link>
         <Link to="Blog" smooth duration={500} className='hover:cursor-pointer hover:scale-110 duration-300 hover:font-bold text-white'>Blog</Link>
