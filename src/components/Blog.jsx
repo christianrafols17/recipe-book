@@ -76,9 +76,9 @@ const Blog = () => {
   return (
     <div name='Blog' className='w-full min-h-screen bg-gradient-to-b from-indigo-200 to-white pt-24 pb-10'>
         <h1 className='text-2xl md:text-4xl font-bold pb-10 ps-4 md:ps-24'>Cooking Tips</h1>
-        <div className='flex flex-col-reverse md:flex-row pe-4 md:pe-24 pb-24 gap-10'>
-          <img src={CookingTips} alt='Cooking-Tips-Hero-Image' className='w-2/5 shadow-md hidden lg:flex'/>
-          <ol className=' list-decimal text-justify ps-8 md:ps-0'>
+        <div className='flex md:flex-row pe-4 md:pe-24 pb-24 gap-10'>
+          <img src={CookingTips} alt='Cooking-Tips-Hero-Image' className='lg:w-2/5 md:w-2/4 shadow-md hidden md:flex'/>
+          <ol className=' list-decimal text-justify ps-8 md:ps-0 md:w-2/4 lg:w-3/5'>
           {cookingTips.map(({ id, title, description }) => (
             <li key={ id }>
               <span className='text-xl font-bold'>{title}</span>
@@ -105,7 +105,7 @@ const Blog = () => {
                   <h2 className='py-4 font-bold text-lg'>Instruction:</h2>
                   <span className=' text-justify text-sm md:text-base'>{ randomRecipe.strInstructions }</span>
               </div>
-              <img src={ randomRecipe.strMealThumb } alt='Featured Image' className='w-full md:w-2/5 h-screen shadow-md'/>
+              <img src={ randomRecipe.strMealThumb } alt='Featured Image' className='w-full md:w-3/5 lg:w-2/5 h-screen shadow-md'/>
           </div>
           )}
         </div>
