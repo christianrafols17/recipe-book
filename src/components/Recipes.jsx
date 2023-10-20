@@ -34,6 +34,7 @@ const Recipes = () => {
     .then((response) => {
       console.log('API Response for searchArea:', response.data);
       setSearchAreaResults(response.data.meals);
+      setRecipes([])
     })
     .catch((error) => {
       console.error('Error fetching data: ', error);
