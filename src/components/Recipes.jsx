@@ -5,6 +5,7 @@ import Modal from './Modal/Modal';
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
+  const [recipesVisible, setRecipesVisible] = useState(true);
 
   const [searchRecipe, setSearchRecipe] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -16,7 +17,7 @@ const Recipes = () => {
 
   const [modal, setModal] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
-
+  //Initial Meals
   useEffect(() => {
     const apiURL = `https://www.themealdb.com/api/json/v1/${API_KEY}/search.php?s=`;
     axios.get(apiURL)
@@ -28,19 +29,20 @@ const Recipes = () => {
     });
   }, []);
 
+  //Search Area
   useEffect(() => {
     const apiAreaURL = `https://www.themealdb.com/api/json/v1/${API_KEY}/filter.php?a=${searchArea}`;
     axios.get(apiAreaURL)
     .then((response) => {
       console.log('API Response for searchArea:', response.data);
       setSearchAreaResults(response.data.meals);
-      setRecipes([])
     })
     .catch((error) => {
       console.error('Error fetching data: ', error);
     })
   }, [searchArea]);
 
+  //Search by Name
   useEffect(() => {
     const fetchMeals = async () => {
       try {
@@ -62,7 +64,8 @@ const Recipes = () => {
 
     if (searchRecipe) {
       fetchMeals();
-      setRecipes([]);
+      setRecipesVisible(false);
+      setSearchAreaResults([]);
     } else {
       setSearchResults([]);
     }
@@ -83,12 +86,29 @@ const Recipes = () => {
   }
 
   const handleInputChange = (event) => {
-    setSearchRecipe(event.target.value);
+    const selectedValue = event.target.value;
+    setSearchRecipe(selectedValue);
+  
+    if (selectedValue === '') {
+      setRecipesVisible(true);
+    } else {
+      setRecipesVisible(false);
+    }
   };
 
   const handleDropdownChange = (event) => {
-    setSearchArea(event.target.value);
+    const selectedValue = event.target.value;
+    setSearchArea(selectedValue);
+  
+    if (selectedValue === '') {
+      setRecipesVisible(true);
+    } else {
+      setRecipesVisible(false);
+    }
   }
+  
+
+  
 
   const openModal = (meal) => {
     const ingredients = allIngredients(meal);
@@ -102,9 +122,11 @@ const Recipes = () => {
     setSelectedRecipe(null);
     setModal(false);
   };   
-
-  console.log(searchArea)
-  console.log(searchAreaResults)
+  console.log('recipes: ', recipes)
+  console.log('recipesVisible: ', recipesVisible)
+  console.log('area: ', searchArea)
+  console.log('search: ', searchRecipe)
+  console.log('searchArea: ', searchAreaResults)
 
   return (
   <div name="Recipes" className='w-full min-h-screen bg-gradient-to-b from-gray-200 to-indigo-200 px-4 md:px-24 pt-16 md:pt-24'>
@@ -128,28 +150,29 @@ const Recipes = () => {
       
       <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5'>
         
-        {recipes && recipes.map((meal) => (
+      {recipes && recipesVisible && recipes.map((meal) => (
+        <div key={meal.idMeal} className='duplicate bg-white bg-opacity-20 rounded-md flex flex-col h-[240px] justify-between text-center shadow-md'>
+          <img className='w-full h-1/2 object-cover rounded-t-md hover:scale-105 duration-200' src={meal.strMealThumb} alt={meal.strMeal}/>
+          <h1 className='text-base font-semibold'>{meal.strMeal}</h1>
+          <span className='text-sm'>{meal.strCategory}</span>
+          <button className='bg-white p-2 rounded-md' onClick={() => openModal(meal)}>View Recipe</button>
+        </div>
+      ))}
+
+      {searchAreaResults && 
+        !recipesVisible &&
+        searchAreaResults.map((meal) => (
           <div key={meal.idMeal} className='duplicate bg-white bg-opacity-20 rounded-md flex flex-col h-[240px] justify-between text-center shadow-md'>
             <img className='w-full h-1/2 object-cover rounded-t-md hover:scale-105 duration-200' src={meal.strMealThumb} alt={meal.strMeal}/>
             <h1 className='text-base font-semibold'>{meal.strMeal}</h1>
             <span className='text-sm'>{meal.strCategory}</span>
             <button className='bg-white p-2 rounded-md' onClick={() => openModal(meal)}>View Recipe</button>
           </div>
-        ))}
-
-        {searchAreaResults && 
-          searchAreaResults.length > 0 &&
-          searchAreaResults.map((meal) => (
-            <div key={meal.idMeal} className='duplicate bg-white bg-opacity-20 rounded-md flex flex-col h-[240px] justify-between text-center shadow-md'>
-              <img className='w-full h-1/2 object-cover rounded-t-md hover:scale-105 duration-200' src={meal.strMealThumb} alt={meal.strMeal}/>
-              <h1 className='text-base font-semibold'>{meal.strMeal}</h1>
-              <span className='text-sm'>{meal.strCategory}</span>
-              <button className='bg-white p-2 rounded-md' onClick={() => openModal(meal)}>View Recipe</button>
-            </div>
-        ))}
+      ))}
 
         {searchResults &&
-          searchResults.length > 0 && (
+          searchResults.length > 0 && 
+          !recipesVisible && (
           searchResults.map((meal) => (
             <div key={meal.idMeal} className='duplicate bg-white bg-opacity-20 rounded-md flex flex-col h-[240px] justify-between text-center shadow-md'>
             <img className='w-full h-1/2 object-cover rounded-t-md hover:scale-105 duration-200' src={meal.strMealThumb} alt={meal.strMeal}/>
