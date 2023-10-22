@@ -13,12 +13,11 @@ const Recipes = () => {
   const [searchArea, setSearchArea] = useState('');
   const [searchAreaResults, setSearchAreaResults] = useState([]);
 
-  const [addInfo, setAddInfo] = useState([]);
-
   const API_KEY = '1';
 
   const [modal, setModal] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+
   //Initial Meals
   useEffect(() => {
     const apiURL = `https://www.themealdb.com/api/json/v1/${API_KEY}/search.php?s=`;
@@ -80,6 +79,7 @@ const Recipes = () => {
     }
   }, [searchRecipe]); 
 
+  //Sort out All Ingredients
   const allIngredients = (meal) => {
     let ingredientsList = [];
     for (let i = 1; i <= 20; i++) {
@@ -94,6 +94,7 @@ const Recipes = () => {
     return ingredientsList;
   }
 
+  //Handle Search Bar Change
   const handleInputChange = (event) => {
     const selectedValue = event.target.value;
     setSearchRecipe(selectedValue);
@@ -105,6 +106,7 @@ const Recipes = () => {
     }
   };
 
+  //Handle Dropdown Change
   const handleDropdownChange = (event) => {
     const selectedValue = event.target.value;
     setSearchArea(selectedValue);
@@ -116,6 +118,7 @@ const Recipes = () => {
     }
   }
   
+  //Open Modal
   const openModal = (meal) => {
     const ingredients = allIngredients(meal);
     meal.ingredients = ingredients;
@@ -124,15 +127,11 @@ const Recipes = () => {
     setModal(true);
   }
 
+  //Close Modal
   const closeModal = () => {
     setSelectedRecipe(null);
     setModal(false);
   };   
-  console.log('recipes: ', recipes)
-  console.log('recipesVisible: ', recipesVisible)
-  console.log('area: ', searchArea)
-  console.log('search: ', searchRecipe)
-  console.log('searchArea: ', searchAreaResults)
 
   return (
   <div name="Recipes" className='w-full min-h-screen bg-gradient-to-b from-gray-200 to-indigo-200 px-4 md:px-24 pt-16 md:pt-24'>
@@ -144,7 +143,21 @@ const Recipes = () => {
               <option value=''>Select Country</option>
               <option value='Canadian'>Canada</option>
               <option value='Chinese'>China</option>
+              <option value='Egyptian'>Egypt</option>
+              <option value='French'>France</option>
+              <option value='Greek'>Greece</option>
+              <option value='Indian'>India</option>
+              <option value='Irish'>Ireland</option>
+              <option value='Italian'>Italy</option>
+              <option value='Jamaican'>Jamaica</option>
+              <option value='Japanese'>Japan</option>
+              <option value='Kenyan'>Kenya</option>
+              <option value='Malaysian'>Malaysia</option>
+              <option value='Mexican'>Mexico</option>
+              <option value='Dutch'>Netherlands</option>
               <option value='Filipino'>Philippines</option>
+              <option value='British'>UK</option>
+              <option value='American'>USA</option>
             </select>
           </div>
           <span className=' border border-yellow-400 rounded-lg w-2/4 md:w-1/3 ms-auto p-2 flex flex-row items-center'>
