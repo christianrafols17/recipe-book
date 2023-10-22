@@ -13,6 +13,8 @@ const Recipes = () => {
   const [searchArea, setSearchArea] = useState('');
   const [searchAreaResults, setSearchAreaResults] = useState([]);
 
+  const [addInfo, setAddInfo] = useState([]);
+
   const API_KEY = '1';
 
   const [modal, setModal] = useState(false);
@@ -29,17 +31,24 @@ const Recipes = () => {
     });
   }, []);
 
-  //Search Area
+  //Search by Area
   useEffect(() => {
-    const apiAreaURL = `https://www.themealdb.com/api/json/v1/${API_KEY}/filter.php?a=${searchArea}`;
-    axios.get(apiAreaURL)
-    .then((response) => {
-      console.log('API Response for searchArea:', response.data);
-      setSearchAreaResults(response.data.meals);
-    })
-    .catch((error) => {
-      console.error('Error fetching data: ', error);
-    })
+    if(searchArea.length > 0) {
+      const apiAreaURL = `https://www.themealdb.com/api/json/v1/${API_KEY}/filter.php?a=${searchArea}`;
+      axios.get(apiAreaURL)
+      .then((response) => {
+        const mealPromises = response.data.meals.map((meal) => {
+          return axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`)
+        })
+        return Promise.all(mealPromises);
+      })
+      .then((detailedMeals) => {
+        setSearchAreaResults(detailedMeals.map((response) => response.data.meals[0]))
+      })
+      .catch((error) => {
+        console.error('Error fetching data: ', error);
+      })
+    }
   }, [searchArea]);
 
   //Search by Name
@@ -107,9 +116,6 @@ const Recipes = () => {
     }
   }
   
-
-  
-
   const openModal = (meal) => {
     const ingredients = allIngredients(meal);
     meal.ingredients = ingredients;
