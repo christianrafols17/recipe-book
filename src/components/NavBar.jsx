@@ -10,7 +10,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className='w-full h-[64px] bg-gray-600 flex flex-row justify-between items-center px-4 md:px-24 fixed'>
+    <div className='w-full h-[64px] bg-gray-600 flex flex-row justify-between items-center px-4 md:px-24 fixed z-10'>
       <div className='md:text-2xl text-green-600 font-bold italic'>
         <h1>Recipe Book</h1>
       </div>

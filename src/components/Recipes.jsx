@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BsSearch } from 'react-icons/bs';
+import { AiOutlineClear } from 'react-icons/ai'
 import axios from 'axios';
 import Modal from './Modal/Modal';
 
@@ -133,13 +134,22 @@ const Recipes = () => {
     setModal(false);
   };   
 
+  //Clear Search Bar
+  const clearSearchBar = () => {
+    setSearchRecipe('');
+    setRecipesVisible(true);
+  }
+
+  console.log(recipesVisible)
+  console.log(searchRecipe)
+
   return (
   <div name="Recipes" className='w-full min-h-screen bg-gradient-to-b from-gray-200 to-indigo-200 px-4 md:px-24 pt-16 md:pt-24'>
       <div className='flex flex-row py-4 items-center'>
-          <h1 className='text-2xl md:text-4xl font-bold'>Recipes</h1>
-          <div className='ms-auto'>
-            <label className='text-lg'>Sort By Country: </label>
-            <select id='areaSelect' name='areaSelect' value={searchArea} onChange={handleDropdownChange} className='text-gray-400 p-2 border border-yellow-500 rounded-md'>
+          <h1 className='text-2xl md:text-4xl font-bold w-1/3'>Recipes</h1>
+          <div className='ms-auto flex flex-row items-center w-1/3'>
+            <label className='text-lg hidden md:flex pe-2'>Sort By Country: </label>
+            <select id='areaSelect' name='areaSelect' value={searchArea} onChange={handleDropdownChange} className='text-gray-400 p-2.5 bg-transparent border border-yellow-500 rounded-lg w-full md:w-1/2'>
               <option value=''>Select Country</option>
               <option value='Canadian'>Canada</option>
               <option value='Chinese'>China</option>
@@ -160,9 +170,9 @@ const Recipes = () => {
               <option value='American'>USA</option>
             </select>
           </div>
-          <span className=' border border-yellow-400 rounded-lg w-2/4 md:w-1/3 ms-auto p-2 flex flex-row items-center'>
+          <span className=' border border-yellow-400 rounded-lg w-1/4 md:w-1/3 ms-auto p-2 flex flex-row items-center'>
               <input type='text' placeholder='Search Recipe' value={searchRecipe} onChange={handleInputChange} className='bg-transparent w-full focus:outline-none'/>
-              <input type='submit' value='' />  <BsSearch size={18} className='hover:cursor-pointer ms-auto'/>
+              <button className='' onClick={clearSearchBar}>  <AiOutlineClear size={24} className='hover:cursor-pointer ms-auto'/></button>
           </span>  
       </div>
       <h3 className='text-justify pb-4'>Welcome to our recipes section, a culinary haven where you can embark on a delicious journey, exploring a wide array of meticulously crafted dishes that cater to every palate and occasion.</h3>
@@ -171,10 +181,12 @@ const Recipes = () => {
         
       {recipes && recipesVisible && recipes.map((meal) => (
         <div key={meal.idMeal} className='duplicate bg-white bg-opacity-20 rounded-md flex flex-col h-[240px] justify-between text-center shadow-md'>
-          <img className='w-full h-1/2 object-cover rounded-t-md hover:scale-105 duration-200' src={meal.strMealThumb} alt={meal.strMeal}/>
-          <h1 className='text-base font-semibold'>{meal.strMeal}</h1>
-          <span className='text-sm'>{meal.strCategory}</span>
-          <button className='bg-white p-2 rounded-md' onClick={() => openModal(meal)}>View Recipe</button>
+          <figure className='relative object-cover h-4/6 '>
+            <img className='w-full h-full rounded-t-md' src={meal.strMealThumb} alt={meal.strMeal}/>
+            <figcaption className='w-1/2 flex justify-start text-sm absolute bottom-0 left-0 bg-white bg-opacity-75 p-2 ps-4 rounded-tr-md'>{meal.strCategory}</figcaption>
+          </figure>
+          <h1 className='text-base flex justify-center items-center font-semibold h-1/6'>{meal.strMeal}</h1>
+          <button className='bg-white p-2 rounded-md h-1/6' onClick={() => openModal(meal)}>View Recipe</button>
         </div>
       ))}
 
@@ -182,9 +194,11 @@ const Recipes = () => {
         !recipesVisible &&
         searchAreaResults.map((meal) => (
           <div key={meal.idMeal} className='duplicate bg-white bg-opacity-20 rounded-md flex flex-col h-[240px] justify-between text-center shadow-md'>
-            <img className='w-full h-1/2 object-cover rounded-t-md hover:scale-105 duration-200' src={meal.strMealThumb} alt={meal.strMeal}/>
-            <h1 className='text-base font-semibold'>{meal.strMeal}</h1>
-            <span className='text-sm'>{meal.strCategory}</span>
+            <figure className='relative object-cover h-4/6 '>
+              <img className='w-full h-full rounded-t-md' src={meal.strMealThumb} alt={meal.strMeal}/>
+              <figcaption className='w-1/2 flex justify-start text-sm absolute bottom-0 left-0 bg-white bg-opacity-75 p-2 ps-4 rounded-tr-md'>{meal.strCategory}</figcaption>
+            </figure>
+            <h1 className='text-base flex justify-center items-center font-semibold h-1/6'>{meal.strMeal}</h1>
             <button className='bg-white p-2 rounded-md' onClick={() => openModal(meal)}>View Recipe</button>
           </div>
       ))}
@@ -194,10 +208,12 @@ const Recipes = () => {
           !recipesVisible && (
           searchResults.map((meal) => (
             <div key={meal.idMeal} className='duplicate bg-white bg-opacity-20 rounded-md flex flex-col h-[240px] justify-between text-center shadow-md'>
-            <img className='w-full h-1/2 object-cover rounded-t-md hover:scale-105 duration-200' src={meal.strMealThumb} alt={meal.strMeal}/>
-            <h1 className='text-base font-semibold'>{meal.strMeal}</h1>
-            <span className='text-sm'>{meal.strCategory}</span>
-            <button className='bg-white p-2 rounded-md' onClick={() => openModal(meal)}>View Recipe</button>
+              <figure className='relative object-cover h-4/6 '>
+                <img className='w-full h-full rounded-t-md' src={meal.strMealThumb} alt={meal.strMeal}/>
+                <figcaption className='w-1/2 flex justify-start text-sm absolute bottom-0 left-0 bg-white bg-opacity-75 p-2 ps-4 rounded-tr-md'>{meal.strCategory}</figcaption>
+              </figure>
+              <h1 className='text-base flex justify-center items-center font-semibold h-1/6'>{meal.strMeal}</h1>
+              <button className='bg-white p-2 rounded-md' onClick={() => openModal(meal)}>View Recipe</button>
           </div>
           ))
         )}
