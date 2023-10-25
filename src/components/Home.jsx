@@ -9,7 +9,7 @@ const Home = () => {
                 <img src={ HeroImage } alt="Dish Hero Image" className='h-full md:h-screen w-full'/>
             </div>
             <div className='w-full md:w-2/5 lg:w-3/5 flex flex-col gap-6 md:gap-10'>
-                <h1 className='text-green-800 text-2xl text-center md:text-4xl md:text-start font-bold'>Welcome to Recipe Book</h1>
+                <h1 className='text-green-800 text-2xl text-center md:text-4xl md:text-start font-bold'>Welcome to <span className='bg-gradient-to-r from-red-600 via-orange-600 to-yellow-600 bg-clip-text text-transparent'>Spoon&Spice</span></h1>
                 <p className='px-4 md:px-0 text-justify'>Introducing our innovative recipe book web app, the culinary companion you've been waiting for. Explore a world of delectable dishes, save your favorite recipes, and create shopping lists with ease, all in one user-friendly platform designed to elevate your cooking experience.</p>
             </div>
         </div>
