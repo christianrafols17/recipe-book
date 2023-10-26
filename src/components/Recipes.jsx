@@ -140,9 +140,6 @@ const Recipes = () => {
     setRecipesVisible(true);
   }
 
-  console.log(recipesVisible)
-  console.log(searchRecipe)
-
   return (
   <div name="Recipes" className='w-full min-h-screen bg-gradient-to-b from-gray-200 to-indigo-200 px-4 md:px-24 pt-16 md:pt-24'>
       <div className='flex flex-row py-4 items-center'>
@@ -153,6 +150,7 @@ const Recipes = () => {
               <option value=''>Select Country</option>
               <option value='Canadian'>Canada</option>
               <option value='Chinese'>China</option>
+              <option value='Croatian'>Croatia</option>
               <option value='Egyptian'>Egypt</option>
               <option value='French'>France</option>
               <option value='Greek'>Greece</option>
@@ -164,10 +162,19 @@ const Recipes = () => {
               <option value='Kenyan'>Kenya</option>
               <option value='Malaysian'>Malaysia</option>
               <option value='Mexican'>Mexico</option>
+              <option value='Moroccan'>Morocco</option>
               <option value='Dutch'>Netherlands</option>
               <option value='Filipino'>Philippines</option>
+              <option value='Polish'>Poland</option>
+              <option value='Portuguese'>Portugal</option>
+              <option value='Russian'>Russia</option>
+              <option value='Spanish'>Spain</option>
+              <option value='Thai'>Thailand</option>
+              <option value='Tunisian'>Tunisia</option>
+              <option value='Turkish'>Turkey</option>
               <option value='British'>UK</option>
               <option value='American'>USA</option>
+              <option value='Vietnamese'>Vietnam</option>
             </select>
           </div>
           <span className=' border border-yellow-400 rounded-lg w-1/4 md:w-1/3 ms-auto p-2 flex flex-row items-center'>
